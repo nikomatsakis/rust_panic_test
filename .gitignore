@@ -1,3 +1,3 @@
 target
 Cargo.lock
-lib/panic_test/native.so
+lib/panic_test/native.*
