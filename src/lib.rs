@@ -11,7 +11,7 @@ pub extern "C" fn panic() -> sys::VALUE {
     });
 
     unsafe {
-        // sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
+        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
         sys::Qnil
     }
 }
