@@ -17,8 +17,10 @@ install:
   - rustup default %RUST_VERSION%-%RUST_HOST%
   - rustc -Vv
   - cargo -V
+  - gem install bundler
+  - bundle install
 
 test_script:
-  - cargo run
+  - bundle exec rake
 
 build: off
