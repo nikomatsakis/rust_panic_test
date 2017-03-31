@@ -16,7 +16,7 @@ environment:
       RUST_VERSION: stable
 
 install:
-  - set PATH="C:\msys64\mingw%MSYS_BITS%\bin;C:\msys64\usr\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%PATH%
+  - set PATH=C:\msys64\mingw%MSYS_BITS%\bin;C:\msys64\usr\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%PATH%
   - echo %PATH%
   - IF NOT EXIST %HOMEDRIVE%%HOMEPATH%\.cargo\bin (curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y)
   - rustup default %RUST_VERSION%-%RUST_HOST%
