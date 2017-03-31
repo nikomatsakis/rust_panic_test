@@ -6,16 +6,18 @@ environment:
   RUST_BACKTRACE: 1
   matrix:
     # 32-bit
-    - RUBY_VERSION: 23
+    - ARCH: i386
+      RUBY_VERSION: 23
       RUST_HOST: i686-pc-windows-msvc
       RUST_VERSION: stable
     # 64-bit
-    - RUBY_VERSION: 23-x64
+    - ARCH: x86_64
+      RUBY_VERSION: 23-x64
       RUST_HOST: x86_64-pc-windows-msvc
       RUST_VERSION: stable
 
 install:
-  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%;%PATH%
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%\%ARCH%;%PATH%
   - echo %PATH%
   - IF NOT EXIST %HOMEDRIVE%%HOMEPATH%\.cargo\bin (curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y)
   - rustup default %RUST_VERSION%-%RUST_HOST%
