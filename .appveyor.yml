@@ -11,7 +11,7 @@ environment:
       RUST_VERSION: stable
 
 install:
-  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%\ruby\windows_build;%PATH%
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%;%PATH%
   - echo %PATH%
   - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y
   - rustup default %RUST_VERSION%-%RUST_HOST%
