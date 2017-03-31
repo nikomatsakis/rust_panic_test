@@ -1,25 +1,19 @@
-# TODO: Maybe add caching
-cache:
-  - '%HOMEDRIVE%%HOMEPATH%\.cargo -> .appveyor.yml'
-  - '%HOMEDRIVE%%HOMEPATH%\.multirust -> .appveyor.yml'
-
 environment:
   RUST_BACKTRACE: 1
   matrix:
     # 32-bit
-    - MSYS_BITS: 32
-      RUST_HOST: i686-pc-windows-msvc
+    - RUST_HOST: i686-pc-windows-msvc
       RUST_VERSION: stable
     # 64-bit
-    - MSYS_BITS: 64
-      RUST_HOST: x86_64-pc-windows-msvc
+    - RUST_HOST: x86_64-pc-windows-msvc
       RUST_VERSION: stable
 
 install:
-  - set PATH=C:\msys64\mingw%MSYS_BITS%\bin;C:\msys64\usr\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%PATH%
-  - echo %PATH%
-  - IF NOT EXIST %HOMEDRIVE%%HOMEPATH%\.cargo\bin (curl https://sh.rustup.rs -sSf | sh -s -- -v --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y)
-  - rustup default %RUST_VERSION%-%RUST_HOST%
+  - curl -sSf -o rustup-init.exe https://win.rustup.rs
+  - rustup-init.exe --default-host %TARGET% --default-toolchain %CHANNEL% -y
+  - set PATH=%PATH%;C:\Users\appveyor\.cargo\bin
+  - rustc -Vv
+  - cargo -V
 
 test_script:
   - cargo run
