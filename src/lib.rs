@@ -7,12 +7,11 @@ use std::ffi::CString;
 #[no_mangle]
 pub extern "C" fn panic() -> sys::VALUE {
     let _ = ::std::panic::catch_unwind(|| {
-        println!("Testing");
-        // panic!("Panic!")
+        panic!("Panic!")
     });
 
     unsafe {
-        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
+        // sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
         sys::Qnil
     }
 }
