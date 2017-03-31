@@ -1,0 +1,6 @@
+[package]
+name = "panic_test"
+version = "0.1.0"
+authors = ["Peter Wagenet <peter.wagenet@gmail.com>"]
+
+[dependencies]
