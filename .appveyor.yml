@@ -14,7 +14,7 @@ environment:
       RUST_VERSION: stable
 
 install:
-  - set PATH=%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%PATH%
+  - set PATH="C:\Program Files (x86)\MSBuild\%TOOLCHAIN_VERSION%\Bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%PATH%""
   - echo %PATH%
   - IF NOT EXIST %HOMEDRIVE%%HOMEPATH%\.cargo\bin (curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y)
   - rustup default %RUST_VERSION%-%RUST_HOST%
