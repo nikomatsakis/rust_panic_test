@@ -6,22 +6,15 @@ use std::ffi::CString;
 // This will become Object#panic in Ruby
 #[no_mangle]
 pub extern "C" fn panic() -> sys::VALUE {
-    let res = ::std::panic::catch_unwind(|| {
-        panic!("Panic!")
+    let _ = ::std::panic::catch_unwind(|| {
+        println!("Testing");
+        // panic!("Panic!")
     });
 
-    println!("Caught: {:?}", res);
-
-    if let Err(_) = res {
-        let msg = format!("Panicked in Rust");
-        let ptr = msg.as_ptr();
-        let len = msg.len();
-        let msg = unsafe { sys::rb_utf8_str_new(ptr as *const libc::c_char, len as libc::c_long) };
-        // WARNING: This will immediately exit out of Rust skipping all destructors
-        unsafe { sys::rb_raise(sys::rb_eRuntimeError, sys::PRINT_VALUE_STR, msg); }
+    unsafe {
+        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
+        sys::Qnil
     }
-
-    unsafe { sys::Qnil }
 }
 
 // This method is called when Ruby loads the native extension
