@@ -1,3 +1,7 @@
+cache:
+  - '%HOMEDRIVE%%HOMEPATH%\.cargo -> .appveyor.yml'
+  - '%HOMEDRIVE%%HOMEPATH%\.multirust -> .appveyor.yml'
+
 environment:
   RUST_BACKTRACE: 1
   matrix:
@@ -13,7 +17,7 @@ environment:
 install:
   - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%;%PATH%
   - echo %PATH%
-  - curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y
+  - IF NOT EXIST %HOMEDRIVE%%HOMEPATH%\.cargo\bin (curl https://sh.rustup.rs -sSf | sh -s -- --default-toolchain %RUST_VERSION% --default-host %RUST_HOST% -y)
   - rustup default %RUST_VERSION%-%RUST_HOST%
   - rustc -Vv
   - cargo -V
