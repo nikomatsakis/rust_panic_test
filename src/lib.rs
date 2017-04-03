@@ -5,14 +5,15 @@ use std::ffi::CString;
 
 // This will become Object#panic in Ruby
 #[no_mangle]
-pub extern "C" fn panic() -> sys::VALUE {
-    let _ = ::std::panic::catch_unwind(|| {
-        panic!("Panic!")
-    });
+pub extern "C" fn panic() -> ! {
+    {
+        let _ = ::std::panic::catch_unwind(|| {
+            panic!("Panic!")
+        });
+    }
 
     unsafe {
-        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr());
-        sys::Qnil
+        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr())
     }
 }
 
