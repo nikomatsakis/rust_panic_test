@@ -27,6 +27,7 @@ install:
   - bundle install
 
 test_script:
+  - set PATH=C:\Ruby%RUBY_VERSION%\bin;C:\Ruby%RUBY_VERSION%\DevKit\bin;C:\Ruby%RUBY_VERSION%\DevKit\mingw\bin;%HOMEDRIVE%%HOMEPATH%\.cargo\bin;%APPVEYOR_BUILD_FOLDER%\%ARCH%;C:\Program\ Files\Git\bin
   - bundle exec rake
 
 build: off
