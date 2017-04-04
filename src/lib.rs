@@ -11,6 +11,7 @@ pub type c_string = *const libc::c_char;
 #[derive(Eq, PartialEq, Copy, Clone, Debug)]
 pub struct VALUE(void_ptr);
 
+#[cfg_attr(windows, link(name="helix-runtime"))]
 extern "C" {
     #[link_name = "HELIX_Qnil"]
     pub static Qnil: VALUE;

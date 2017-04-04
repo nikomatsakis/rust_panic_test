@@ -2,6 +2,7 @@
 name = "panic_test"
 version = "0.1.0"
 authors = ["Peter Wagenet <peter.wagenet@gmail.com>"]
+build = "build.rs"
 
 [lib]
 crate-type = ["cdylib"]
