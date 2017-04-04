@@ -8,7 +8,3 @@ crate-type = ["cdylib"]
 
 [dependencies]
 libc = "0.2.0"
-
-[dependencies.libcruby-sys]
-git = "https://github.com/tildeio/helix"
-branch = "error-handling"
