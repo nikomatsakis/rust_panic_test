@@ -3,12 +3,22 @@ extern crate libcruby_sys as sys;
 
 use std::ffi::CString;
 
+struct DropMe;
+
+impl Drop for DropMe {
+    fn drop(&mut self) {
+        println!("DropMe");
+    }
+}
+
 // This will become Object#panic in Ruby
 #[no_mangle]
 pub extern "C" fn panic() -> sys::VALUE {
     let _ = ::std::panic::catch_unwind(|| {
+        let _d = DropMe;
         panic!("Panic!")
     });
+    println!("Guten tag");
     unsafe { sys::Qnil }
 }
 
