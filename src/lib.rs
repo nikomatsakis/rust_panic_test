@@ -20,14 +20,6 @@ pub extern "C" fn rust_raise() -> ! {
     }
 }
 
-#[no_mangle]
-pub extern "C" fn panic_and_raise() -> ! {
-    {
-        let _ = panic();
-    }
-    rust_raise()
-}
-
 // This method is called when Ruby loads the native extension
 #[allow(non_snake_case)]
 #[no_mangle]
@@ -36,6 +28,5 @@ pub extern "C" fn Init_native() {
         // This is a built-in Ruby method that allows us to define C methods on Ruby object
         sys::rb_define_method(sys::rb_cObject, CString::new("panic").unwrap().as_ptr(), panic as *const libc::c_void, 0);
         sys::rb_define_method(sys::rb_cObject, CString::new("rust_raise").unwrap().as_ptr(), rust_raise as *const libc::c_void, 0);
-        sys::rb_define_method(sys::rb_cObject, CString::new("panic_and_raise").unwrap().as_ptr(), panic_and_raise as *const libc::c_void, 0);
     }
 }
