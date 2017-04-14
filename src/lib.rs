@@ -26,7 +26,7 @@ pub extern "C" fn panic() -> sys::VALUE {
 #[no_mangle]
 pub extern "C" fn rust_raise() -> ! {
     unsafe {
-        sys::rb_raise(sys::rb_eRuntimeError, b"Panicked in Rust\0" as *const u8 as *const i8)
+        sys::rb_raise(sys::rb_eRuntimeError, CString::new("Panicked in Rust").unwrap().as_ptr())
     }
 }
 
